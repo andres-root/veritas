@@ -1,2 +1,2 @@
 # veritas
-Truth
+The roman goddess of truth.
