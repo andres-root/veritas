@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	<meta charset="utf-8" />
+		<title>Veritas Index</title>
+		<link rel="stylesheet" href="../content/css/index.css" />
+	</head>
+	<body>
+		<header class="main-header">
+			<a class="main-header__app-name" href="javascript:void(0)">Veritas</a>
+			<div class="main-header__recruiter">
+				<p class="main-header__recruiter__greetings">Hola, <span class="main-header__recruiter__name" data-bind="text: userName">Mario</span></p>
+				<div class="main-header__recruiter__image">
+					<div class="main-header__recruiter__image-circle">
+						<img class="main-header__recruiter__github-image" data-bind="attr: { src: picture }">
+					</div>
+				</div>
+			</div>
+		</header>
+		<section class="user-list">
+			<div class="user-list__add-user__cont">
+				<a class="user-list__add-user" href="javascript:void(0)">+</a>
+			</div>
+			<ul class="user-list__main-list" data-bind="foreach: candidates">
+				<li class="user-list__user">
+					<a href="">
+						<div class="user-image_cont">
+							<div class="user-image_bg">
+								<img class="user-image" data-bind="attr: { src: picture }">
+							</div>
+						</div>
+						<div class="user-data">
+							<p data-bind="text: name">David Avellaneda</p>
+							<p data-bind="text: city">Bogotá, Colombia</p>
+							<p><a data-bind="text: web, attr: { href: web }">http://monoku.com</a></p>
+							<div>
+								<a href="">Button A</a>
+								<a href="">Button B</a>
+							</div>
+						</div>
+
+					</a>
+				</li>
+			</ul>
+		</section>
+		<script data-main="../content/js/conf" src="../content/bower_components/requirejs/require.js"></script>
+		<script type="text/javascript" src=""></script>
+	</body>
+</html>
