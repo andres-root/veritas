@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-	<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8" />
 		<title>Veritas Index</title>
 		<link rel="stylesheet" href="../content/css/index.css" />
 	</head>
 	<body>
 		<header class="main-header">
 			<a class="main-header__app-name" href="javascript:void(0)">Veritas</a>
-			<div class="main-header__recruiter">
+			<div class="main-header__recruiter text-right">
 				<p class="main-header__recruiter__greetings">Hola, <span class="main-header__recruiter__name" data-bind="text: userName">Mario</span></p>
 				<div class="main-header__recruiter__image">
 					<div class="main-header__recruiter__image-circle">
@@ -17,10 +18,16 @@
 				</div>
 			</div>
 		</header>
+		<section class="finder-cont">
+			<form>
+				<div class="form-group input-githubuser">
+					<label for="exampleInputEmail1">Github username</label>
+					<input type="text" class="form-control" id="" placeholder="i.e cavilarts">
+				</div>
+				<button class="btn btn-primary add-github__user">+</button>
+			</form>	
+		</section>
 		<section class="user-list">
-			<div class="user-list__add-user__cont">
-				<a class="user-list__add-user" href="javascript:void(0)">+</a>
-			</div>
 			<ul class="user-list__main-list" data-bind="foreach: candidates">
 				<li class="user-list__user">
 					<a href="">
@@ -34,14 +41,20 @@
 							<p data-bind="text: city">Bogotá, Colombia</p>
 							<p><a data-bind="text: web, attr: { href: web }">http://monoku.com</a></p>
 							<div>
-								<a href="">Button A</a>
-								<a href="">Button B</a>
+								<button class="btn btn-primary">Button A</button>
+								<button class="btn btn-success">Button B</button>
+								<a href=""></a>
+								<a href=""></a>
 							</div>
 						</div>
 
 					</a>
 				</li>
 			</ul>
+			<div class="user-list__load-more">
+				<button class="btn btn-default" type="submit">Load More +</button>
+
+			</div>
 		</section>
 		<script data-main="../content/js/conf" src="../content/bower_components/requirejs/require.js"></script>
 		<script type="text/javascript" src=""></script>

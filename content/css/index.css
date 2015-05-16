@@ -6336,7 +6336,6 @@ button.close {
 .main-header__recruiter {
   color: #FFFFFF;
   display: inline-block;
-  float: right;
   margin-top: 1.5em; }
 
 .main-header__recruiter__greetings {
@@ -6390,7 +6389,10 @@ button.close {
 .user-list__user {
   padding: 0;
   background: #FFFFFF;
-  margin: 1em; }
+  margin: 1em;
+  border: 1px solid #D6D6D6;
+  padding: 1em;
+  border-radius: 5px; }
 
 .user-image_cont {
   display: inline-block;
@@ -6403,3 +6405,18 @@ button.close {
 .user-data {
   display: inline-block;
   vertical-align: top; }
+
+.input-githubuser {
+  width: 82%;
+  display: inline-block;
+  vertical-align: middle; }
+
+.add-github__user {
+  display: inline-block;
+  vertical-align: middle; }
+
+.finder-cont {
+  padding: 1em; }
+
+.user-list__load-more {
+  text-align: center; }
