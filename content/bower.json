@@ -25,6 +25,8 @@
   "dependencies": {
     "requirejs": "~2.1.17",
     "jquery": "~2.1.4",
-    "knockout": "~3.3.0"
+    "knockout": "~3.3.0",
+    "bootstrap": "~3.3.4",
+    "normalize": "~1.0.4"
   }
 }
