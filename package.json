@@ -1,0 +1,24 @@
+{
+  "name": "veritas",
+  "version": "0.0.0",
+  "description": "The roman goddess of truth.",
+  "main": "server.js",
+  "dependencies": {
+    "jslint": "^0.9.0",
+    "express": "^4.12.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andres-root/veritas.git"
+  },
+  "author": "andresroot, cvilarts, roluisker",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andres-root/veritas/issues"
+  }
+}
