@@ -1,0 +1,30 @@
+{
+  "name": "Veritas",
+  "version": "0.1",
+  "homepage": "https://github.com/andres-root/veritas",
+  "description": "Veritas project",
+  "moduleType": [
+    "amd"
+  ],
+  "keywords": [
+    "veritas"
+  ],
+  "authors": [
+    "Carlos",
+    "Andres",
+    "Luis"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "requirejs": "~2.1.17",
+    "jquery": "~2.1.4",
+    "knockout": "~3.3.0"
+  }
+}
