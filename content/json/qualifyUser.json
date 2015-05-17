@@ -1,0 +1,38 @@
+{
+	"userData": {
+		"id": 1,
+		"picture": "https://avatars2.githubusercontent.com/u/777213?v=3&s=460",
+		"name": "David Avellaneda",
+		"city": "Bogotá, Colombia",
+		"web": "www.monoku.com"
+	},
+	"userLanguages": [
+		{
+			"name": "C",
+			"firstLetter": "C"
+		},
+		{
+			"name": "C++",
+			"firstLetter": "C"
+		},
+		{
+			"name": "Javascript",
+			"firstLetter": "J"
+		},
+		{
+			"name": "CSS",
+			"firstLetter": "CSS"
+		}
+	],
+	"statistics": [
+		{
+			"title": "Javascript",
+			"acertivity": "86%",
+			"grade": "S",
+			"popularity": 19,
+			"codingStyle": 60,
+			"performance": 80,
+			"bestPractices": 99
+		}
+	]
+}

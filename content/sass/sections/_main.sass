@@ -86,9 +86,10 @@
 	vertical-align: top
 
 .input-githubuser
-	width: 82%
+
+.input-username
 	display: inline-block
-	vertical-align: middle
+	width: 85%
 
 .add-github__user
 	display: inline-block
@@ -99,3 +100,67 @@
 
 .user-list__load-more
 	text-align: center
+
+.user-data__username
+
+	&:before
+		content: "\eab4" 
+		font-family: $font-icons
+		padding: 0 0.5em
+
+.user-data__placed
+	
+	&:before
+		content: "\e947" 
+		font-family: $font-icons
+		padding: 0 0.5em
+
+.user-data__website
+	
+	&:before
+		content: "\e9cb"
+		font-family: $font-icons
+		padding: 0 0.5em
+
+.section-qualify
+	position: absolute
+	top: 7em
+	left: -100%
+	background: $background-gray
+	transition: all 2s ease-in
+	width: 100%
+
+	&.active
+		left: 0
+		-webkit-transition: 1s left, 2s 1s right cubic-bezier(0,1,1,1)
+		-moz-transition: 1s left, 2s 1s right cubic-bezier(0,1,1,1)
+		-o-transition: 1s left, 2s 1s right cubic-bezier(0,1,1,1)
+		transition: 1s left, 2s 1s right cubic-bezier(0,1,1,1)
+
+	.laguages-cont
+		padding: 0 1em
+
+	.laguages-list
+		list-style: none
+		margin: 0
+		padding: 0
+
+	.laguages-list__language
+		padding: 0
+		display: inline-block
+
+	.laguages-list__language__name		
+		display: inline-block
+		background: #5BC0DE
+		color: $color-white
+		border-radius: 30px
+		padding: 0.5em
+
+.statistics-cont
+	padding: 0 1em
+
+.section-qualify__close
+	float: right
+
+.section-qualify__close__cont
+	padding: 1em
