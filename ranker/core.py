@@ -9,6 +9,7 @@ import math
 git_user = os.environ.get('GIT_USER', '')
 git_pass = os.environ.get('GIT_PASS', '')
 
+
 def get_repo_by_name(user_name):
     # list_user_repos = []
     repos_url = "https://api.github.com/users/{0}/repos".format(user_name)
@@ -126,7 +127,6 @@ def user_rank(username):
     repos = user_repos(username)
     total_repos = len(repos)
     stargazers_count = 0
-    weighted = 100    
 
     for r in repos:
         stargazers_count += r["stargazers_count"]
@@ -148,7 +148,4 @@ def user_rank(username):
     data['percentageBad'] = per_error
 
     return data
-
-
-
 
