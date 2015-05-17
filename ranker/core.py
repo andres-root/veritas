@@ -1,10 +1,13 @@
+# -*- coding: utf-8 -*-
+
+from __future__ import unicode_literals
 import json
 import requests
 import os
 
 
 def get_repo_by_name(user_name):
-    list_user_repos = []
+    # list_user_repos = []
     repos_url = "https://api.github.com/users/{0}/repos".format(user_name)
 
     response = requests.get(repos_url)
@@ -65,3 +68,28 @@ def popularity(user_name):
         stars += dictionary[x]["stargazers_count"]
 
     return stars + (1.0 - 1.0/num_repos)
+
+
+def user_data(username):
+    url = 'https://api.github.com/users/{0}'.format(username)
+    data = requests.get(url)
+    return json.loads(data.content)
+
+
+def user_repos(username):
+    repos_url = "https://api.github.com/users/{0}/repos".format(username)
+    data = requests.get(repos_url)
+    return json.loads(data.content)
+
+
+def user_popularity(username):
+    repos = user_repos(username)
+    total_repos = len(repos)
+
+    stargazers_count = 0
+
+    for r in repos:
+        stargazers_count += r["stargazers_count"]
+
+    return stargazers_count + (1.0 - 1.0/total_repos)
+
