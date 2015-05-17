@@ -4,7 +4,7 @@ from custom.decorators import json_response
 
 def index(request):
     context = {}
-    return render(request, 'index.html', context)
+    return render(request, 'web/index.html', context)
 
 
 @json_response
