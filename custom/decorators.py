@@ -4,8 +4,13 @@ from django.conf import settings
 from django.core import serializers
 from django.core.paginator import Paginator, InvalidPage
 import json as simplejson
-from django.http import HttpResponseNotAllowed,\
-    HttpResponseForbidden, HttpResponse, Http404, HttpResponseBadRequest
+from django.http import (
+    HttpResponseNotAllowed,
+    # HttpResponseForbidden,
+    HttpResponse,
+    Http404,
+    HttpResponseBadRequest
+)
 from django.shortcuts import redirect
 
 SIZE = getattr(settings, "OBJECTS_PAGE", 15)
@@ -285,5 +290,3 @@ def add_http_var(parameter_name, required=True):
             return func(request, *args, **kwargs)
         return decorator
     return wrap
-
-
