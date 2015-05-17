@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 import json
 import requests
 import os
+import math
 
 git_user = os.environ.get('GIT_USER', '')
 git_pass = os.environ.get('GIT_PASS', '')
@@ -93,33 +94,39 @@ def rank_repo(username):
     parsed = json.loads(repo_content.content)
     errors = []
     a = []
+    linesCount = 0
     for f in parsed:
         ext = os.path.splitext(f['name'])[1]
-        if ext == '.js':
-            errors.append(json.loads(requests.get('http://192.168.1.211:3000/code/', params={'code': requests.get(f['download_url']).content}).content))
+        if ext == '.js':                          
+            errors.append(json.loads(requests.get('http://192.168.1.211:3000/code/', params={'code': requests.get( f['download_url'] ).content}).content))
+            linesCount += len(requests.get( f['download_url'] ).content.splitlines())
     error_types = {}
-    error_count = 0
+    error_count = 0    
     for l in errors:
         for obj in l:
             error_count += 1
+
             if obj['ruleId'] not in error_types.keys():
                 error_types[obj['ruleId']] = 1
             else:
                 error_types[obj['ruleId']] += 1
     data['errorCount'] = error_count
-    data['errorTypes'] = error_types
+    data['errorTypes'] = error_types    
+    data['linesCount'] = linesCount    
 
     return data
 
 
 
 def user_rank(username):
+    
     languages_list = []
     languages = {}
     data = {}
     repos = user_repos(username)
     total_repos = len(repos)
-    stargazers_count = 0    
+    stargazers_count = 0
+    weighted = 100    
 
     for r in repos:
         stargazers_count += r["stargazers_count"]
@@ -134,8 +141,14 @@ def user_rank(username):
 
     data["stargazers_count"] = stargazers_count + (1.0 - 1.0/total_repos)
     data["languages"] = languages
-    data['codeMetrics'] = rank_repo(username)
-    data['testEvn'] = os.environ.get('GIT_USER')
+    data['codeMetrics'] = rank_repo(username)    
+    
+    per_error = data['codeMetrics']['errorCount'] * 100 / data['codeMetrics']['linesCount']
+
+    data['percentageBad'] = per_error
 
     return data
+
+
+
 
