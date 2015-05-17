@@ -67,7 +67,7 @@
 				</div>
 			</div>
 			<div class="laguages-cont">
-				<h3>User languages</h1>
+				<h3 class="user-title">User languages</h3>
 				<ul class="laguages-list" data-bind="foreach: userLanguages">
 					<li class="laguages-list__language">
 						<p class="laguages-list__language__name" data-bind="text: $data"></p>
@@ -75,9 +75,9 @@
 				</ul>
 			</div>
 			<div class="statistics-cont">
-				<h3>User statistics</h3>
+				<h3 class="user-title">User statistics</h3>
 				<div data-bind="foreach: statistics">
-					<p data-bind="text: 'Developer grade'+ grade"></p>
+					<p class="user-grade"><span class="user-grade_text" data-bind="text: grade"></span><span class="user-grade-desc">User Grade</span></p>
 					<p data-bind="text: title"></p>
 					<div class="progress">
 						<div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" data-bind="attr: {style: 'width: '+popularity+'%'}, css: { 'progress-bar-success': popularity > 79, 'progress-bar-warning': popularity < 80, 'progress-bar-danger': popularity < 20 }">
