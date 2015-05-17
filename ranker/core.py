@@ -5,6 +5,8 @@ import json
 import requests
 import os
 
+git_user = os.environ.get('GIT_USER', '')
+git_pass = os.environ.get('GIT_PASS', '')
 
 def get_repo_by_name(user_name):
     # list_user_repos = []
@@ -71,25 +73,69 @@ def popularity(user_name):
 
 
 def user_data(username):
-    url = 'https://api.github.com/users/{0}'.format(username)
+    url = 'https://api.github.com/users/{0}'.format(username, auth=(git_user, git_pass))
     data = requests.get(url)
     return json.loads(data.content)
 
 
 def user_repos(username):
     repos_url = "https://api.github.com/users/{0}/repos".format(username)
-    data = requests.get(repos_url)
+    data = requests.get(repos_url, auth=(git_user, git_pass))
     return json.loads(data.content)
 
 
-def user_popularity(username):
+def rank_repo(username):
+    data = {}
+    repo_url = "https://api.github.com/repos/{0}/{1}/contents".format(
+        username, "jstest")
+
+    repo_content = requests.get(repo_url, auth=(git_user, git_pass))
+    parsed = json.loads(repo_content.content)
+    errors = []
+    a = []
+    for f in parsed:
+        ext = os.path.splitext(f['name'])[1]
+        if ext == '.js':
+            errors.append(json.loads(requests.get('http://192.168.1.211:3000/code/', params={'code': requests.get(f['download_url']).content}).content))
+    error_types = {}
+    error_count = 0
+    for l in errors:
+        for obj in l:
+            error_count += 1
+            if obj['ruleId'] not in error_types.keys():
+                error_types[obj['ruleId']] = 1
+            else:
+                error_types[obj['ruleId']] += 1
+    data['errorCount'] = error_count
+    data['errorTypes'] = error_types
+
+    return data
+
+
+
+def user_rank(username):
+    languages_list = []
+    languages = {}
+    data = {}
     repos = user_repos(username)
     total_repos = len(repos)
-
-    stargazers_count = 0
+    stargazers_count = 0    
 
     for r in repos:
         stargazers_count += r["stargazers_count"]
+        languages_list.append(json.loads(requests.get(r["languages_url"], auth=(git_user, git_pass)).content))
 
-    return stargazers_count + (1.0 - 1.0/total_repos)
+    for l in languages_list:
+        if len(l) > 0:
+            if l.keys()[0] not in languages.keys():
+                languages[l.keys()[0]] = l.values()[0]
+            else:
+                languages[l.keys()[0]] += l.values()[0]
+
+    data["stargazers_count"] = stargazers_count + (1.0 - 1.0/total_repos)
+    data["languages"] = languages
+    data['codeMetrics'] = rank_repo(username)
+    data['testEvn'] = os.environ.get('GIT_USER')
+
+    return data
 
