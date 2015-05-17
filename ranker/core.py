@@ -6,8 +6,8 @@ import json
 import requests
 import os
 
-git_user = os.environ.get('GIT_USER', 'roluisker')
-git_pass = os.environ.get('GIT_PASS', 'metalhead8888')
+git_user = os.environ.get('GIT_USER', '')
+git_pass = os.environ.get('GIT_PASS', '')
 
 
 def get_repo_by_name(user_name):
