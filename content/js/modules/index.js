@@ -23,13 +23,13 @@ define([
 
 		$userForm.on('submit', function(form){
 			var userName = $(this).find('.input-username');
-
+			showLoader();
 			$.ajax({
 				"url": loadUserUrl+userName.val(),
 				"crossDomain": true,
 				"contentType": 'application/json',
 			}).done(function(response){
-				
+				hideLoader();
 				response.indexData = true;
 
 				// console.log(mycallback)
@@ -42,6 +42,7 @@ define([
 					indexData.valueHasMutated();
 				}
 			}).fail(function(error){
+				hideLoader();
 				console.log(error);
 				$('.default-errors').fadeIn().delay(2500).fadeOut();
 			});
@@ -52,6 +53,7 @@ define([
 		
 
 		$usersCont.on("click", $qualifyBtn, function(evt){
+			showLoader();
 			var userId = $(this).find('.userid').attr('data-userid');
 
 			if($(event.target).hasClass('remove-user')){
@@ -78,12 +80,12 @@ define([
 					"url": calcUserUrl+userName,
 					"method": "GET"
 				}).done(function(response) {
+					hideLoader();
 					var errors = _.valuesIn(response.codeMetrics.errorTypes);
 					
 					response.userData = indexData();
 					response.Linespercentage = ((errors.length*100)/13);
 
-					console.log(response)
 					var winHeight = $('body').height();
 					if(typeof userQualify() !== "object"){
 						
@@ -99,11 +101,20 @@ define([
 					window.scrollTo(0, 0);
 
 				}).fail(function(error) {
+					hideLoader();
 					console.log(error);
 				});
 			}
 			
 		});
+		
+		function showLoader(){
+			$('.mask').addClass('active');
+		}
+
+		function hideLoader(){
+			$('.mask').removeClass('active');
+		}
 
 		$closeUser.on("click", function(){
 			$qualifySec.removeClass('active');
