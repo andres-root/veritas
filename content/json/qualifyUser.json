@@ -6,24 +6,7 @@
 		"city": "Bogotá, Colombia",
 		"web": "www.monoku.com"
 	},
-	"userLanguages": [
-		{
-			"name": "C",
-			"firstLetter": "C"
-		},
-		{
-			"name": "C++",
-			"firstLetter": "C"
-		},
-		{
-			"name": "Javascript",
-			"firstLetter": "J"
-		},
-		{
-			"name": "CSS",
-			"firstLetter": "CSS"
-		}
-	],
+	"userLanguages": ["java", "pearl", "Javascript", "python"],
 	"statistics": [
 		{
 			"title": "Javascript",
