@@ -7,7 +7,7 @@
 		<title>Veritas Index</title>
 		<link rel="stylesheet" href="{% static "css/index.css" %}" />
 	</head>
-	<body class="veritas-main">
+	<body class="veritas-main" data-load-user="/user/" data-calc-user="/rank/">
 		{% block content %}
 		{% endblock %}
 		<script data-main="{% static "js/conf" %}" src="{% static "bower_components/requirejs/require.js" %}"></script>

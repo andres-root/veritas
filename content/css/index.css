@@ -6385,8 +6385,8 @@ button.close {
 .user-list {
   background: #F7F7F7;
   display: none; }
-  .user-list:active {
-    display: inline-block; }
+  .user-list.active {
+    display: block; }
 
 .user-list__add-user__cont {
   padding: 1em;
@@ -6524,6 +6524,9 @@ button.close {
 
 .default-errors {
   display: none; }
+
+.progress-bar {
+  color: black; }
 
 @media screen and (max-width: 480px) {
   .main-header {

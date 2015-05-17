@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import unicode_literals
+import operator
 import json
 import requests
 import os
 
-git_user = os.environ.get('GIT_USER', '')
-git_pass = os.environ.get('GIT_PASS', '')
+git_user = os.environ.get('GIT_USER', 'roluisker')
+git_pass = os.environ.get('GIT_PASS', 'metalhead8888')
 
 
 def get_repo_by_name(user_name):
@@ -135,8 +136,11 @@ def user_rank(username):
             else:
                 languages[l.keys()[0]] += l.values()[0]
 
+    # languages = sorted(languages.items(), key=operator.itemgetter(1))
+
     data["stargazers_count"] = stargazers_count + (1.0 - 1.0/total_repos)
-    data["languages"] = languages
+    data["languages"] = languages.keys()
+    # data["languagesDict"] = languages
     data['codeMetrics'] = rank_repo(username)
     per_error = data['codeMetrics']['errorCount'] * 100 / data['codeMetrics']['linesCount']
     data['percentageBad'] = per_error

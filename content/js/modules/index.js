@@ -8,7 +8,7 @@ define([
 		_
 	){
 		var indexData = ko.observable(),
-			$usersCont = $('.user-list__main-list'),
+			$usersCont = $('.user-list__user'),
 			$qualifyBtn = $('.userid'),
 			$finderUsers = $('.user-list'),
 			$qualifySec = $('.section-qualify'),
@@ -17,7 +17,7 @@ define([
 			$mainFrame = $('.veritas-main'),
 			userQualify = ko.observable(),
 			loadUserUrl = $mainFrame.attr('data-load-user'),
-			calcUserUrl = $mainFrame.attr('data-load-user'),
+			calcUserUrl = $mainFrame.attr('data-calc-user'),
 			$userForm = $('.userForm');
 
 
@@ -29,9 +29,13 @@ define([
 				"crossDomain": true,
 				"contentType": 'application/json',
 			}).done(function(response){
+				
+				response.indexData = true;
+
 				// console.log(mycallback)
 				if(typeof indexData() !== "object"){
 					indexData(response);
+					//console.log(indexData())
 					ko.applyBindings(indexData, $finderUsers[0]);
 				}else{
 					indexData(response);
@@ -48,7 +52,8 @@ define([
 		
 
 		$usersCont.on("click", $qualifyBtn, function(evt){
-			var userId = parseInt($(event.target).attr('data-userid'), 10);
+			var userId = $(this).find('.userid').attr('data-userid');
+
 			if($(event.target).hasClass('remove-user')){
 
 				var cands = indexData(),
@@ -67,16 +72,24 @@ define([
 
 				return false;
 			}else{
+				
 				var userName = userId;
 				$.ajax({
 					"url": calcUserUrl+userName,
-					"method": "GET",
-					"data": {userid: userId}
+					"method": "GET"
 				}).done(function(response) {
+					var errors = _.valuesIn(response.codeMetrics.errorTypes);
+					
+					response.userData = indexData();
+					response.Linespercentage = ((errors.length*100)/13);
+
+					console.log(response)
 					var winHeight = $('body').height();
 					if(typeof userQualify() !== "object"){
 						
 						userQualify(response);
+
+
 						$qualifySec.css({'height': winHeight});
 						ko.applyBindings(userQualify, $qualifySec[0]);
 					}else{

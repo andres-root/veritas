@@ -8,7 +8,9 @@
     "express": "^4.12.3"
   },
   "devDependencies": {
-    "eslint": "^0.21.1"
+    "eslint": "^0.21.1",
+    "gulp": "^3.8.11",
+    "gulp-sass": "^2.0.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
