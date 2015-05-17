@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+
+from __future__ import unicode_literals
 import json
 import requests
 import os
@@ -66,3 +68,9 @@ def popularity(user_name):
         stars += dictionary[x]["stargazers_count"]
 
     return stars + (1.0 - 1.0/num_repos)
+
+
+def user_data(username):
+    url = 'https://api.github.com/users/{0}'.format(username)
+    data = requests.get(url)
+    return json.loads(data.content)
