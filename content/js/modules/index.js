@@ -14,22 +14,38 @@ define([
 			$qualifySec = $('.section-qualify'),
 			$closeUser = $('.section-qualify__close'),
 			$removeUser = $('.remove-user'),
-			userQualify = ko.observable();
+			$mainFrame = $('.veritas-main'),
+			userQualify = ko.observable(),
+			loadUserUrl = $mainFrame.attr('data-load-user'),
+			calcUserUrl = $mainFrame.attr('data-load-user'),
+			$userForm = $('.userForm');
 
-		$.ajax({
-			"url": "../../content/json/index.json",
-			"method": "GET"
-		}).done(function(response){
-			if(typeof indexData() !== "object"){
-				indexData(response);
-				ko.applyBindings(indexData, $finderUsers[0]);
-			}else{
-				indexData(response);
-				indexData.valueHasMutated();
-			}
-		}).fail(function(error){
-			console.log(error);
+
+		$userForm.on('submit', function(form){
+			var userName = $(this).find('.input-username');
+
+			$.ajax({
+				"url": loadUserUrl+userName.val()+'/',
+				"method": "GET",
+				"data": {}
+			}).done(function(response){
+				if(typeof indexData() !== "object"){
+					indexData(response);
+					ko.applyBindings(indexData, $finderUsers[0]);
+				}else{
+					indexData(response);
+					indexData.valueHasMutated();
+				}
+
+			}).fail(function(error){
+				debugger
+				console.log(error);
+			});
+
+			return false;
+
 		});
+		
 
 		$usersCont.on("click", $qualifyBtn, function(evt){
 			var userId = parseInt($(event.target).attr('data-userid'), 10);
@@ -51,9 +67,9 @@ define([
 
 				return false;
 			}else{
-
+				var userName = userId;
 				$.ajax({
-					"url": "../../content/json/qualifyUser.json",
+					"url": calcUserUrl+userName,
 					"method": "GET",
 					"data": {userid: userId}
 				}).done(function(response) {

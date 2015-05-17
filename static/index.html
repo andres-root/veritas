@@ -6,7 +6,7 @@
 		<title>Veritas Index</title>
 		<link rel="stylesheet" href="../content/css/index.css" />
 	</head>
-	<body class="veritas-main">
+	<body class="veritas-main" data-load-user="http://192.168.1.211:8000/user/" data-calc-user="http://192.168.1.211:8000/rank/">
 		<header class="main-header">
 			<a class="main-header__app-name" href="javascript:void(0)">Veritas</a>
 			<div class="main-header__recruiter text-right">
@@ -19,7 +19,7 @@
 			</div>
 		</header>
 		<section class="finder-cont">
-			<form>
+			<form class="userForm">
 				<div class="form-group input-githubuser">
 					<input type="text" class="form-control input-username" id="" placeholder="Github username i.e cavilarts">
 					<button class="btn btn-primary add-github__user">+</button>
@@ -40,7 +40,7 @@
 						<p class="user-data__website"><a data-bind="text: web, attr: { href: web }">http://monoku.com</a></p>
 						<div>
 							<a class="btn btn-primary userid" data-bind="attr:{ 'data-userid': id }">Calificar</a>
-							<a class="btn btn-danger remove-user" data-bind="attr:{ 'data-userid': id }">Descartar</a>
+							<a class="btn btn-danger remove-user" data-bind="attr:{ 'data-userid': username }">Descartar</a>
 						</div>
 					</div>
 				</li>
