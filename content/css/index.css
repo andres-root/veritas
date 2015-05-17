@@ -6340,6 +6340,10 @@ button.close {
   color: #FFFFFF;
   font-size: 3em; }
   .main-header__app-name:hover {
+    color: #FFFFFF;
+    text-decoration: none; }
+  .main-header__app-name:focus {
+    color: #FFFFFF;
     text-decoration: none; }
 
 .main-header__recruiter {
@@ -6508,14 +6512,11 @@ button.close {
     top: -11px;
     right: 0; }
 
-@media (max-width: 480px) {
+@media screen and (max-width: 480px) {
   .main-header {
     text-align: center; }
   .main-header__app-name {
     display: block; }
-  .main-header__recruiter {
-    display: block;
-    text-align: center; }
   .user-image_cont {
     display: block;
     vertical-align: top;
@@ -6526,4 +6527,26 @@ button.close {
     text-align: center;
     padding-top: 0.5em; }
   .section-qualify {
-    top: 11em; } }
+    top: 11em; }
+  .main-header__recruiter {
+    display: block;
+    text-align: center;
+    float: none; } }
+
+@media screen and (min-width: 480px) {
+  .main-header__recruiter {
+    display: block;
+    float: right; }
+  .input-username {
+    width: 92%; }
+  .user-list__main-list {
+    text-align: center; }
+  .user-list__user {
+    display: inline-block; }
+  .form-group {
+    text-align: center; } }
+
+@media screen and (min-width: 768px) {
+  .main-.main-header__recruiter {
+    display: block;
+    float: right; } }
