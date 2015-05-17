@@ -3,7 +3,7 @@ import request
 import os
       
 
-def function get_repo_by_name(user_name)
+def  get_repo_by_name(user_name):
    	   list_user_repos = []
        repos_url 	   = "https://api.github.com/users/{0}/repos".format(user_name)
 
@@ -18,7 +18,7 @@ def function get_repo_by_name(user_name)
 
        return result
 
- def function get_js_files(url='https://api.github.com/repos/andres-root/galleryjs/contents/js')
+ def  get_js_files(url='https://api.github.com/repos/andres-root/galleryjs/contents/js'):
       js_files_result = []
 
       response 	    = requests.get(url)
@@ -35,7 +35,7 @@ def function get_repo_by_name(user_name)
 	  return js_files_result 
 
 
-def function get_content_js_files(js_files_list)
+def  get_content_js_files(js_files_list):
 	  code_dictionary = {}
       
       for x in range(0, len(js_files_list)-1):
@@ -47,7 +47,7 @@ def function get_content_js_files(js_files_list)
 
       return code_dictionary
 
-def fucntion popularity()
+def popularity():
 	list_user_repos = []
     repos_url 	    = "https://api.github.com/users/{0}/repos".format(user_name)
 
@@ -55,7 +55,9 @@ def fucntion popularity()
     repos_content   = response.contents
     dictionary      = json.loads(repos_content)    
 
-    for x in range(0, len(dictionary) - 1):
+    num_repos 		= len(dictionary)
+
+    for x in range(0, num_repos - 1):
     	stars		+= dictionary[x]["stargazers_count"]
 
-    return stars
+    return stars + (1.0 - 1.0/num_repos)
