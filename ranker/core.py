@@ -1,10 +1,11 @@
+# -*- coding: utf-8 -*-
 import json
 import requests
 import os
 
 
 def get_repo_by_name(user_name):
-    list_user_repos = []
+    # list_user_repos = []
     repos_url = "https://api.github.com/users/{0}/repos".format(user_name)
 
     response = requests.get(repos_url)
