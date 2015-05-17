@@ -71,18 +71,47 @@ def popularity(user_name):
 
 
 def user_data(username):
-    url = 'https://api.github.com/users/{0}'.format(username, auth=('hacktestbunny', 'bunny93'))
+    url = 'https://api.github.com/users/{0}'.format(username, auth=('user', 'pass'))
     data = requests.get(url)
     return json.loads(data.content)
 
 
 def user_repos(username):
     repos_url = "https://api.github.com/users/{0}/repos".format(username)
-    data = requests.get(repos_url, auth=('hacktestbunny', 'bunny93'))
+    data = requests.get(repos_url, auth=('user', 'pass'))
     return json.loads(data.content)
 
 
-def user_popularity(username):
+def rank_repo(username):
+    data = {}
+    repo_url = "https://api.github.com/repos/{0}/{1}/contents".format(
+        username, "jstest")
+
+    repo_content = requests.get(repo_url, auth=('user', 'pass'))
+    parsed = json.loads(repo_content.content)
+    errors = []
+    a = []
+    for f in parsed:
+        ext = os.path.splitext(f['name'])[1]
+        if ext == '.js':
+            errors.append(json.loads(requests.get('http://192.168.1.211:3000/code/', params={'code': requests.get(f['download_url']).content}).content))
+    error_types = {}
+    error_count = 0
+    for l in errors:
+        for obj in l:
+            error_count += 1
+            if obj['ruleId'] not in error_types.keys():
+                error_types[obj['ruleId']] = 1
+            else:
+                error_types[obj['ruleId']] += 1
+    data['errorCount'] = error_count
+    data['errorTypes'] = error_types
+
+    return data
+
+
+
+def user_rank(username):
     languages_list = []
     languages = {}
     data = {}
@@ -92,7 +121,7 @@ def user_popularity(username):
 
     for r in repos:
         stargazers_count += r["stargazers_count"]
-        languages_list.append(json.loads(requests.get(r["languages_url"], auth=('hacktestbunny', 'bunny93')).content))
+        languages_list.append(json.loads(requests.get(r["languages_url"], auth=('user', 'pass')).content))
 
     for l in languages_list:
         if len(l) > 0:
@@ -103,6 +132,7 @@ def user_popularity(username):
 
     data["stargazers_count"] = stargazers_count + (1.0 - 1.0/total_repos)
     data["languages"] = languages
+    data['codeMetrics'] = rank_repo(username)
 
     return data
 
