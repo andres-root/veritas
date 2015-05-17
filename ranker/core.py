@@ -5,6 +5,8 @@ import json
 import requests
 import os
 
+git_user = os.environ.get('GIT_USER', '')
+git_pass = os.environ.get('GIT_PASS', '')
 
 def get_repo_by_name(user_name):
     # list_user_repos = []
@@ -71,14 +73,14 @@ def popularity(user_name):
 
 
 def user_data(username):
-    url = 'https://api.github.com/users/{0}'.format(username, auth=('user', 'pass'))
+    url = 'https://api.github.com/users/{0}'.format(username, auth=(git_user, git_pass))
     data = requests.get(url)
     return json.loads(data.content)
 
 
 def user_repos(username):
     repos_url = "https://api.github.com/users/{0}/repos".format(username)
-    data = requests.get(repos_url, auth=('user', 'pass'))
+    data = requests.get(repos_url, auth=(git_user, git_pass))
     return json.loads(data.content)
 
 
@@ -87,7 +89,7 @@ def rank_repo(username):
     repo_url = "https://api.github.com/repos/{0}/{1}/contents".format(
         username, "jstest")
 
-    repo_content = requests.get(repo_url, auth=('user', 'pass'))
+    repo_content = requests.get(repo_url, auth=(git_user, git_pass))
     parsed = json.loads(repo_content.content)
     errors = []
     a = []
@@ -121,7 +123,7 @@ def user_rank(username):
 
     for r in repos:
         stargazers_count += r["stargazers_count"]
-        languages_list.append(json.loads(requests.get(r["languages_url"], auth=('user', 'pass')).content))
+        languages_list.append(json.loads(requests.get(r["languages_url"], auth=(git_user, git_pass)).content))
 
     for l in languages_list:
         if len(l) > 0:
@@ -133,6 +135,7 @@ def user_rank(username):
     data["stargazers_count"] = stargazers_count + (1.0 - 1.0/total_repos)
     data["languages"] = languages
     data['codeMetrics'] = rank_repo(username)
+    data['testEvn'] = os.environ.get('GIT_USER')
 
     return data
 
