@@ -74,3 +74,9 @@ def user_data(username):
     url = 'https://api.github.com/users/{0}'.format(username)
     data = requests.get(url)
     return json.loads(data.content)
+
+
+def user_repos(username):
+    repos_url = "https://api.github.com/users/{0}/repos".format(user_name)
+    data = requests.get(respos_url)
+    return json.loads(data.content)

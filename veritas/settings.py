@@ -105,4 +105,5 @@ STATIC_URL = '/content/'
 
 STATICFILES_DIRS = (
     "/home/andresroot/sites/hackathon/veritas/content/",
+    "/Users/luisalfonsobejaranosanchez/bunny/veritas/content",
 )

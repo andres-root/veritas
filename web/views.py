@@ -5,7 +5,8 @@ from django.shortcuts import render
 from custom.decorators import json_response
 
 # App Modules
-from ranker.core import user_data
+from ranker.core import user_data, user_repos
+
 
 
 def index(request):
@@ -17,6 +18,12 @@ def index(request):
 def get_user_data(request, username):
     data = user_data(username)
     return data
+
+
+@json_response
+def get_user_repos(request, username):
+	data = user_repos(username)
+	return data
 
 
 @json_response
