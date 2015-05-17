@@ -8,6 +8,7 @@ import os
 git_user = os.environ.get('GIT_USER', '')
 git_pass = os.environ.get('GIT_PASS', '')
 
+
 def get_repo_by_name(user_name):
     # list_user_repos = []
     repos_url = "https://api.github.com/users/{0}/repos".format(user_name)
@@ -119,8 +120,7 @@ def user_rank(username):
     data = {}
     repos = user_repos(username)
     total_repos = len(repos)
-    stargazers_count = 0    
-
+    stargazers_count = 0
     for r in repos:
         stargazers_count += r["stargazers_count"]
         languages_list.append(json.loads(requests.get(r["languages_url"], auth=(git_user, git_pass)).content))
@@ -138,4 +138,3 @@ def user_rank(username):
     data['testEvn'] = os.environ.get('GIT_USER')
 
     return data
-
