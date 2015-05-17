@@ -11,7 +11,7 @@ define([
 			$finderUsers = $('.user-list'),
 			$qualifySec = $('.section-qualify'),
 			$closeUser = $('.section-qualify__close'),
-			userQualify;
+			userQualify = ko.observable();
 
 		$.ajax({
 			"url": "../../content/json/index.json",
@@ -36,18 +36,25 @@ define([
 				"data": {userid: userId}
 			}).done(function(response) {
 				var winHeight = $('body').height();
-				indexData = response;
-				ko.applyBindings(indexData, $qualifySec[0]);
+				if(typeof userQualify() !== "object"){
+					
+					userQualify(response);
+					$qualifySec.css({'height': winHeight});
+					ko.applyBindings(userQualify, $qualifySec[0]);
+				}else{
+					userQualify(response);
+					userQualify.valueHasMutated();
+				}
+				window.scrollTo(0, 0);
 
-				$qualifySec.css({'height': winHeight});
 			}).fail(function(error) {
 				console.log(error);
 			});
 		}
 
 		$closeUser.on("click", function(){
-			$qualifySec.removeClass('active')
-			ko.cleanNode($qualifySec[0]);
+			$qualifySec.removeClass('active');
 		});
 	
+
 });
