@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-	<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8" />
 		<title>Veritas Index</title>
 		<link rel="stylesheet" href="../content/css/index.css" />
 	</head>
-	<body>
+	<body class="veritas-main">
 		<header class="main-header">
 			<a class="main-header__app-name" href="javascript:void(0)">Veritas</a>
-			<div class="main-header__recruiter">
+			<div class="main-header__recruiter text-right">
 				<p class="main-header__recruiter__greetings">Hola, <span class="main-header__recruiter__name" data-bind="text: userName">Mario</span></p>
 				<div class="main-header__recruiter__image">
 					<div class="main-header__recruiter__image-circle">
@@ -17,31 +18,89 @@
 				</div>
 			</div>
 		</header>
+		<section class="finder-cont">
+			<form>
+				<div class="form-group input-githubuser">
+					<input type="text" class="form-control input-username" id="" placeholder="Github username i.e cavilarts">
+					<button class="btn btn-primary add-github__user">+</button>
+				</div>
+			</form>	
+		</section>
 		<section class="user-list">
-			<div class="user-list__add-user__cont">
-				<a class="user-list__add-user" href="javascript:void(0)">+</a>
-			</div>
 			<ul class="user-list__main-list" data-bind="foreach: candidates">
 				<li class="user-list__user">
-					<a href="">
-						<div class="user-image_cont">
-							<div class="user-image_bg">
-								<img class="user-image" data-bind="attr: { src: picture }">
-							</div>
+					<div class="user-image_cont">
+						<div class="user-image_bg">
+							<img class="user-image" data-bind="attr: { src: picture }">
 						</div>
-						<div class="user-data">
-							<p data-bind="text: name">David Avellaneda</p>
-							<p data-bind="text: city">Bogotá, Colombia</p>
-							<p><a data-bind="text: web, attr: { href: web }">http://monoku.com</a></p>
-							<div>
-								<a href="">Button A</a>
-								<a href="">Button B</a>
-							</div>
+					</div>
+					<div class="user-data">
+						<p class="user-data__username" data-bind="text: name">David Avellaneda</p>
+						<p class="user-data__placed" data-bind="text: city">Bogotá, Colombia</p>
+						<p class="user-data__website"><a data-bind="text: web, attr: { href: web }">http://monoku.com</a></p>
+						<div>
+							<a class="btn btn-primary userid" data-bind="attr:{ 'data-userid': id }">Calificar</a>
+							<a class="btn btn-danger" data-bind="attr:{ 'data-userid': id }">Descartar</a>
 						</div>
-
-					</a>
+					</div>
 				</li>
 			</ul>
+			<div class="user-list__load-more">
+				<button class="btn btn-default" type="submit">Load More +</button>
+
+			</div>
+		</section>
+		<section class="section-qualify" data-bind="css: {active: userData}">
+			<div class="section-qualify__close__cont">
+				<a class="section-qualify__close" href="#">close</a>
+			</div>
+			<div class="user-list__user">
+				<div class="user-image_cont">
+					<div class="user-image_bg">
+						<img class="user-image" data-bind="attr: { src: userData.picture }">
+					</div>
+				</div>
+				<div class="user-data">
+					<p class="user-data__username" data-bind="text: userData.name">David Avellaneda</p>
+					<p class="user-data__placed" data-bind="text: userData.city">Bogotá, Colombia</p>
+					<p class="user-data__website"><a data-bind="text: userData.web, attr: { href: userData.web }">http://monoku.com</a></p>
+				</div>
+			</div>
+			<div class="laguages-cont">
+				<h3>User languages</h1>
+				<ul class="laguages-list" data-bind="foreach: userLanguages">
+					<li class="laguages-list__language">
+						<p class="laguages-list__language__name" data-bind="text: name"></p>
+					</li>
+				</ul>
+			</div>
+			<div class="statistics-cont">
+				<h3>User statistics</h3>
+				<div data-bind="foreach: statistics">
+					<p data-bind="text: 'Developer grade'+ grade"></p>
+					<p data-bind="text: title"></p>
+					<div class="progress">
+						<div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" data-bind="attr: {style: 'width: '+popularity+'%'}, css: { 'progress-bar-success': popularity > 79, 'progress-bar-warning': popularity < 80, 'progress-bar-danger': popularity < 20 }">
+							<span >popularity</span>
+						</div>
+					</div>
+					<div class="progress">
+						<div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" data-bind="attr: {style: 'width: '+codingStyle+'%'}, css: { 'progress-bar-success': codingStyle >= 70, 'progress-bar-warning': codingStyle < 69, 'progress-bar-danger': codingStyle < 20 }">
+							<span >codingStyle</span>
+						</div>
+					</div>
+					<div class="progress">
+						<div class="progress-bar progress-bar-success progress-bar-striped" data-bind="attr: {style: 'width: '+performance+'%'}, css: { 'progress-bar-success': performance > 79, 'progress-bar-warning': performance < 80, 'progress-bar-danger': performance < 20 }">
+							<span >performance</span>
+						</div>
+					</div>
+					<div class="progress">
+						<div class="progress-bar progress-bar-success progress-bar-striped" data-bind="attr: {style: 'width: '+bestPractices+'%'}, css:{ 'progress-bar-success': bestPractices > 79, 'progress-bar-warning': bestPractices < 80, 'progress-bar-danger': bestPractices < 20 }">
+							<span>best practices</span>
+						</div>
+					</div>
+				</div>
+			</div>	
 		</section>
 		<script data-main="../content/js/conf" src="../content/bower_components/requirejs/require.js"></script>
 		<script type="text/javascript" src=""></script>
