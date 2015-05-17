@@ -53,7 +53,7 @@
 			</div>
 		</div>
 		<div class="user-data">
-			<p class="user-data__username" data-bind="text: userData.name">David Avellaneda</p>
+			<p class="user-data__username" data-bind="text: userData.name || userData.login">David Avellaneda</p>
 			<p class="user-data__placed" data-bind="text: userData.location">Bogotá, Colombia</p>
 			<p class="user-data__website"><a data-bind="text: userData.html_url, attr: { href: userData.html_url }">http://monoku.com</a></p>
 		</div>
@@ -93,4 +93,11 @@
 		We can`t find this search
 	</div>
 </section>
+<div class="mask">
+			<div class="spinner"></div>
+			<div class="spin-text">
+				<p>Loading...</p>
+				<p>You're  here!, the day just got better</p>
+			</div>
+		</div>
 {% endblock %}
