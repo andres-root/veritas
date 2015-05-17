@@ -71,25 +71,38 @@ def popularity(user_name):
 
 
 def user_data(username):
-    url = 'https://api.github.com/users/{0}'.format(username)
+    url = 'https://api.github.com/users/{0}'.format(username, auth=('hacktestbunny', 'bunny93'))
     data = requests.get(url)
     return json.loads(data.content)
 
 
 def user_repos(username):
     repos_url = "https://api.github.com/users/{0}/repos".format(username)
-    data = requests.get(repos_url)
+    data = requests.get(repos_url, auth=('hacktestbunny', 'bunny93'))
     return json.loads(data.content)
 
 
 def user_popularity(username):
+    languages_list = []
+    languages = {}
+    data = {}
     repos = user_repos(username)
     total_repos = len(repos)
-
-    stargazers_count = 0
+    stargazers_count = 0    
 
     for r in repos:
         stargazers_count += r["stargazers_count"]
+        languages_list.append(json.loads(requests.get(r["languages_url"], auth=('hacktestbunny', 'bunny93')).content))
 
-    return stargazers_count + (1.0 - 1.0/total_repos)
+    for l in languages_list:
+        if len(l) > 0:
+            if l.keys()[0] not in languages.keys():
+                languages[l.keys()[0]] = l.values()[0]
+            else:
+                languages[l.keys()[0]] += l.values()[0]
+
+    data["stargazers_count"] = stargazers_count + (1.0 - 1.0/total_repos)
+    data["languages"] = languages
+
+    return data
 

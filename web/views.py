@@ -27,7 +27,6 @@ def get_user_repos(request, username):
 
 
 @json_response
-def rank_user(request, username):
-    data = {}
-    data['popularity'] = user_popularity(username)
-    return data
+def rank_user(request, username):    
+    return user_popularity(username)
+    
