@@ -6253,7 +6253,14 @@ button.close {
     display: none !important; } }
 
 @font-face {
-  font-family: 'icomoon';
+  font-family: 'openSans';
+  src: url("../fonts/icomoon.eot?-6xo473");
+  src: url("../fonts/icomoon.eot?#iefix-6xo473") format("embedded-opentype"), url("../fonts/icomoon.woff?-6xo473") format("woff"), url("../fonts/icomoon.ttf?-6xo473") format("truetype"), url("../fonts/icomoon.svg?-6xo473#icomoon") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'OpenSans-Regular';
   src: url("../fonts/icomoon.eot?-6xo473");
   src: url("../fonts/icomoon.eot?#iefix-6xo473") format("embedded-opentype"), url("../fonts/icomoon.woff?-6xo473") format("woff"), url("../fonts/icomoon.ttf?-6xo473") format("truetype"), url("../fonts/icomoon.svg?-6xo473#icomoon") format("svg");
   font-weight: normal;
@@ -6376,7 +6383,10 @@ button.close {
   width: 40px; }
 
 .user-list {
-  background: #F7F7F7; }
+  background: #F7F7F7;
+  display: none; }
+  .user-list:active {
+    display: inline-block; }
 
 .user-list__add-user__cont {
   padding: 1em;
@@ -6511,6 +6521,9 @@ button.close {
     position: absolute;
     top: -11px;
     right: 0; }
+
+.default-errors {
+  display: none; }
 
 @media screen and (max-width: 480px) {
   .main-header {

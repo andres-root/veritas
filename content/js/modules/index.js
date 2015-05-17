@@ -25,10 +25,11 @@ define([
 			var userName = $(this).find('.input-username');
 
 			$.ajax({
-				"url": loadUserUrl+userName.val()+'/',
-				"method": "GET",
-				"data": {}
+				"url": loadUserUrl+userName.val(),
+				"crossDomain": true,
+				"contentType": 'application/json',
 			}).done(function(response){
+				// console.log(mycallback)
 				if(typeof indexData() !== "object"){
 					indexData(response);
 					ko.applyBindings(indexData, $finderUsers[0]);
@@ -36,10 +37,9 @@ define([
 					indexData(response);
 					indexData.valueHasMutated();
 				}
-
 			}).fail(function(error){
-				debugger
 				console.log(error);
+				$('.default-errors').fadeIn().delay(2500).fadeOut();
 			});
 
 			return false;
