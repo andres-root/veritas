@@ -143,6 +143,7 @@ def user_rank(username):
     data["languages"] = languages
     data['codeMetrics'] = rank_repo(username)    
     
+    
     per_error = data['codeMetrics']['errorCount'] * 100 / data['codeMetrics']['linesCount']
 
     data['percentageBad'] = per_error
