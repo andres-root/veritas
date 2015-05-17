@@ -5,7 +5,7 @@ from django.shortcuts import render
 from custom.decorators import json_response
 
 # App Modules
-from ranker.core import user_data, user_repos
+from ranker.core import user_data, user_repos, user_popularity
 
 
 
@@ -27,6 +27,7 @@ def get_user_repos(request, username):
 
 
 @json_response
-def rank_user(request):
-    context = {}
-    return context
+def rank_user(request, username):
+    data = {}
+    data['popularity'] = user_popularity(username)
+    return data

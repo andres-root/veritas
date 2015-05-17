@@ -5,5 +5,7 @@ from . import views
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^user/(?P<username>.*)/$', views.get_user_data, name='get_user_data'),
-    url(r'^user/(?P<username>.*)/repos/$', views.get_user_repos, name='get_user_repos'),    
+    url(r'^user/(?P<username>.*)/repos/$', views.get_user_repos, name='get_user_repos'),
+    url(r'^rank/(?P<username>.*)/$', views.rank_user, name='rank_user'),        
+
 ]

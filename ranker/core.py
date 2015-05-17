@@ -77,6 +77,19 @@ def user_data(username):
 
 
 def user_repos(username):
-    repos_url = "https://api.github.com/users/{0}/repos".format(user_name)
-    data = requests.get(respos_url)
+    repos_url = "https://api.github.com/users/{0}/repos".format(username)
+    data = requests.get(repos_url)
     return json.loads(data.content)
+
+
+def user_popularity(username):
+    repos = user_repos(username)
+    total_repos = len(repos)
+
+    stargazers_count = 0
+
+    for r in repos:
+        stargazers_count += r["stargazers_count"]
+
+    return stargazers_count + (1.0 - 1.0/total_repos)
+
